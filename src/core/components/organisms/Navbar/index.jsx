@@ -5,7 +5,7 @@ const NavbarComponent = (props) => {
   return (
     <>
       <div className="navbar bg-base-100">
-        <div className="container max-w-screen-xl mx-auto px-6">
+        <div className="container max-w-screen-xl mx-auto">
           <Link className="font-bold text-2xl">Resi Tracking</Link>
           <div className="ms-6 flex-none">
             {data.map((val, index) => (
