@@ -8,7 +8,7 @@ const ListKurirWidget = ({ ...props }) => {
     loading: loadingKurir,
     resi,
   } = props;
-
+  console.log(resi)
   const [url, setUrl] = useState(null);
   const { data, error, loading } = useGetData(url);
   const colorClasses = [
@@ -59,8 +59,8 @@ const ListKurirWidget = ({ ...props }) => {
               </button>
             ))}
           </div>
+        <>{dataListResi && <CekResiWidget {...dataListResi} />}</>
         </div>
-        {/*  */}
       </>
     );
   } else if (dataListResi !== null) {

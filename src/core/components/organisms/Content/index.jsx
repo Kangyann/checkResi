@@ -9,17 +9,20 @@ const ContentComponent = () => {
   const [url, setUrl] = useState(null);
   const { data, error, loading } = useGetData(url);
 
-  let resiSave;
+  let saveResi = null;
   const inputValue = (e) => {
-    resiSave = e.target.value;
+    saveResi = e.target.value;
   };
   const handleClick = () => {
-    if (resiSave === "" || resiSave === undefined) {
-      setMessage("Input tidakk osong");
+    if (saveResi === null) {
+      setMessage(
+        "Data tidak boleh kosong. Silakan inputkan Resi anda terlebih dahulu."
+      );
     } else {
+      setMessage(null);
       const listKurirUrl = `https://api.binderbyte.com/v1/list_courier?api_key=${process.env.REACT_APP_API_KEY}`;
       setUrl(listKurirUrl);
-      setResi(resiSave);
+      setResi(saveResi);
     }
   };
   let dataListKurir;
@@ -27,11 +30,11 @@ const ContentComponent = () => {
   if (data || loading || error) {
     dataListKurir = { data, error, loading };
   }
-  // console.log(listKurirUrl);
   return (
     <>
       <div className="flex items-center min-h-96 mt-6">
         <div className="container max-w-screen-xl mx-auto">
+          <p>SPXID041453874823</p>
           <div className="flex justify-between gap-3">
             <div className="flex flex-col flex-[.9]">
               <h2 className="font-bold text-4xl mb-6">
@@ -55,7 +58,7 @@ const ContentComponent = () => {
                 Tracking Sekarang
               </button>
               {message && (
-                <p className="transition-all ease-in delay-150">{message}</p>
+                <p className="text-center text-error mt-3">{message}</p>
               )}
               {dataListKurir && (
                 <ListKurirWidget {...dataListKurir} resi={resi} />
