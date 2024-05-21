@@ -4,32 +4,33 @@ import ListKurirWidget from "core/components/widgets/listKurirWidget";
 import useGetData from "core/hooks/httpRequest";
 import { useState, useEffect } from "react";
 const ContentComponent = () => {
-  const [resi, setResi] = useState(null);
   const [message, setMessage] = useState(null);
-  const [url, setUrl] = useState(null);
-  const { data, error, loading } = useGetData(url);
+  const [data, setData] = useState(null);
+  // const { data, error, loading } = useGetData(url);
 
-  let saveResi = null;
+  let saveResi;
   const inputValue = (e) => {
-    saveResi = e.target.value;
+    if (e.target.value.length >= 1) {
+      return (saveResi = e.target.value);
+    }
+    return (saveResi = null);
   };
   const handleClick = () => {
-    if (saveResi === null) {
-      setMessage(
-        "Data tidak boleh kosong. Silakan inputkan Resi anda terlebih dahulu."
+    console.log(saveResi);
+    if (saveResi == undefined || saveResi == null) {
+      // setData({ url: "" });
+      return setMessage(
+        "Data tidak boleh kosong. Masukan Resi anda terlebih dahulu."
       );
-    } else {
-      setMessage(null);
-      const listKurirUrl = `https://api.binderbyte.com/v1/list_courier?api_key=${process.env.REACT_APP_API_KEY}`;
-      setUrl(listKurirUrl);
-      setResi(saveResi);
     }
+    const params = {
+      url: `https://api.binderbyte.com/v1/list_courier?api_key=${process.env.REACT_APP_API_KEY}`,
+      awb: saveResi,
+    };
+    setMessage(null);
+    return setData(params);
   };
-  let dataListKurir;
 
-  if (data || loading || error) {
-    dataListKurir = { data, error, loading };
-  }
   return (
     <>
       <div className="flex items-center min-h-96 mt-6">
@@ -52,7 +53,7 @@ const ContentComponent = () => {
                 onChange={inputValue}
               />
               <button
-                className="bg-base-200 py-1.5 px-3 rounded flex items-center justify-center gap-3"
+                className="btn bg-base-200 py-1.5 px-3 rounded flex items-center justify-center gap-3"
                 onClick={handleClick}
               >
                 Tracking Sekarang
@@ -60,9 +61,7 @@ const ContentComponent = () => {
               {message && (
                 <p className="text-center text-error mt-3">{message}</p>
               )}
-              {dataListKurir && (
-                <ListKurirWidget {...dataListKurir} resi={resi} />
-              )}
+              <ListKurirWidget {...data} />
             </div>
             {/*  */}
             <WebStatusTable />
