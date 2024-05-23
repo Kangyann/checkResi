@@ -2,7 +2,7 @@ const WebStatusTable = () => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table class="table table-md">
+        <table className="table table-md">
           <thead>
             <tr>
               <th>Info</th>
