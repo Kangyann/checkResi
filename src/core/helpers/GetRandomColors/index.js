@@ -1,12 +1,12 @@
 const colorClasses = [
-  "btn-primary",
-  "btn-secondary",
-  "btn-accent",
-  "btn-success",
-  "btn-error",
-  "btn-info",
-  "btn-warning",
-  "btn-neutral",
+  "primary",
+  "secondary",
+  "accent",
+  "success",
+  "error",
+  "info",
+  "warning",
+  "neutral",
 ];
 
 const getRandomColorClass = () => {
