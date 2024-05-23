@@ -6,7 +6,7 @@ const NavbarComponent = (props) => {
     <>
       <div className="navbar bg-base-100">
         <div className="container max-w-screen-xl mx-auto">
-          <Link className="font-bold text-2xl">Resi Tracking</Link>
+          <Link className="font-bold text-2xl">RETRA</Link>
           <div className="ms-6 flex-none">
             {data.map((val, index) => (
               <>
