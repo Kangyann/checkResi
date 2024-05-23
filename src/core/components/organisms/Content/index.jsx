@@ -1,25 +1,24 @@
 import WebStatusTable from "core/components/molecules/webStatusTable";
 import useGetData from "core/hooks/httpRequest";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Kurir from "../Kurir";
+import useDebounce from "core/helpers/Debounce";
 
 const ContentComponent = () => {
+  const inputResi = useRef(null);
   const [message, setMessage] = useState(null);
-  const [inputResi, setInputResi] = useState("");
   const [url, setUrl] = useState(null);
   const { data, error, loading } = useGetData(url);
-  const handleChange = (e) => {
-    setInputResi(e.target.value);
-  };
 
   const getCourierCode = (e) => {
     const params = {
-      url: `https://api.binderbyte.com/v1/track?api_key=e9714f6c00c20562cbf98cb88974434b989168734dee968bdabc329eb9c4ae69&courier=${e.target.name}&awb=${inputResi}`,
+      url: `https://api.binderbyte.com/v1/track?api_key=e9714f6c00c20562cbf98cb88974434b989168734dee968bdabc329eb9c4ae69&courier=${e.target.name}&awb=${inputResi.current.value}`,
     };
     return setUrl(params.url);
   };
   const handleClick = () => {
-    if (inputResi === "") {
+    let { value } = inputResi.current;
+    if (value === "") {
       return setMessage(
         "Data tidak boleh kosong. Isi dengan Resi anda terelebih dahulu."
       );
@@ -29,12 +28,12 @@ const ContentComponent = () => {
     };
     setMessage("");
     setUrl(params.url);
+    console.log(value);
   };
   return (
     <>
       <div className="flex items-center min-h-96 mt-6">
         <div className="container max-w-screen-xl mx-auto">
-          {/* <p>SPXID041453874823</p> */}
           <div className="flex justify-between gap-3">
             <div className="flex flex-col flex-[.9]">
               <h2 className="font-bold text-4xl mb-6">Resi Tracking Gratis</h2>
@@ -47,8 +46,7 @@ const ContentComponent = () => {
                 type="text"
                 placeholder="Masukan resi anda disini"
                 className="mb-4 py-1.5 px-3 rounded text-center placeholder:text-center"
-                onChange={handleChange}
-                value={inputResi}
+                ref={inputResi}
               />
               <button
                 className="btn bg-base-200 py-1.5 px-3 rounded flex items-center justify-center gap-3"
