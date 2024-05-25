@@ -9,7 +9,7 @@ const Kurir = ({ ...props }) => {
         <div className="flex flex-wrap gap-3 my-2">
           {props.data.map((val, index) => (
             <ButtonComponent
-              className={`btn btn-${getRandomColorClass()}`}
+              className={`btn ${getRandomColorClass()}`}
               name={val.code}
               key={`${val.code}-${index}`}
               onClick={props.onClick}

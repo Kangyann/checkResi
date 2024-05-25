@@ -1,6 +1,6 @@
 const dataNavbar = [
   {
-    to: "/",
+    to: "/api",
     name: "API",
   },
   {

@@ -10,13 +10,13 @@ const dataContent = {
   Component: {
     button: {
       className:
-        "btn bg-base-200 py-1.5 px-3 rounded flex items-center justify-center gap-3",
+        "btn py-1.5 px-3 rounded flex items-center justify-center gap-3 btn-neutral",
       text: "Tracking Sekarang",
     },
     input: {
       type: "text",
       placeholder: "Masukan resi anda disini",
-      className: "mb-4 py-1.5 px-3 rounded text-center placeholder:text-center"
+      className: "mb-4 py-1.5 px-3 rounded text-center placeholder:text-center border"
     }
   }
 };
